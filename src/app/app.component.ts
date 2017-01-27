@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Http} from "@angular/http";
+import {SwapiService} from "./core/swapi.service";
 
-const PEOPLE_API_URL="http://swapi.co/api/people/";
 
 @Component({
   selector: 'app-root',
@@ -11,10 +10,11 @@ const PEOPLE_API_URL="http://swapi.co/api/people/";
 export class AppComponent implements OnInit{
 
   title = 'app works!';
+  people=[];
 
-  constructor(private  http:Http) {}
+  constructor(private swapiService:SwapiService) {}
 
   ngOnInit() {
-    this.http.get(PEOPLE_API_URL);
+    this.swapiService.getPeopleList().subscribe((people)=>this.people=people);
   }
 }
